@@ -4,7 +4,7 @@ from colorama import Fore, Back, Style
 class TrollScammer:
 
     bad_url: str = ""
-    bad_url_methode: int = 0
+    bad_url_method: int = 0
     bad_url_username_name: str = ""
     bad_url_password_name: str = ""
     username_char_between = []
@@ -26,7 +26,7 @@ class TrollScammer:
         self.bad_url = self.get_string_cli("Enter the server address:")
         self.bad_url_username_name = self.get_string_cli("What is the transfer parameter for the username?")
         self.bad_url_password_name = self.get_string_cli("What is the transfer parameter for the password?")
-        self.bad_url_methode = self.get_numselect_cli("Should the data be transmitted via 1) GET or 2) POST", 2)
+        self.bad_url_method = self.get_numselect_cli("Should the data be transmitted via 1) GET or 2) POST", 2)
 
     def get_string_cli(self,input_message: str) -> str:
         while True:
@@ -66,10 +66,10 @@ class TrollScammer:
         print("github sourcecode: https://github.com/uvulpos/anti-phishing-attack")
         print("-----------------------------------------------")
         print(Fore.GREEN+"target-addr: " + Style.RESET_ALL + self.bad_url)
-        if self.bad_url_methode == 1:
-            print(Fore.GREEN+"target-methode:" + Style.RESET_ALL + " GET")
+        if self.bad_url_method == 1:
+            print(Fore.GREEN+"target-method:" + Style.RESET_ALL + " GET")
         else:
-            print(Fore.GREEN+"target-methode:" + Style.RESET_ALL + " POST")
+            print(Fore.GREEN+"target-method:" + Style.RESET_ALL + " POST")
         print(Fore.GREEN+"target-username-name: " + Style.RESET_ALL + self.bad_url_username_name)
         print(Fore.GREEN+"target-password-name: " + Style.RESET_ALL + self.bad_url_password_name)
         print("-----------------------------------------------")
@@ -107,7 +107,7 @@ class TrollScammer:
 
     def create_request(self, username: str, password: str) -> bool:
         # request
-        if self.bad_url_methode == 1:
+        if self.bad_url_method == 1:
             payload = {self.bad_url_username_name:username,self.bad_url_password_name:password}
             result = requests.get(self.bad_url, allow_redirects=False, params=payload)
         else:
